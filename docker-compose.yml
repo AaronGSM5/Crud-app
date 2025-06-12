@@ -1,0 +1,36 @@
+services:
+  # Service 1: PHP with Apache Web Server
+  php-apache:
+    build: .
+    container_name: my_php_apache_app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html/
+    depends_on:
+      - mysql-db
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: my_php_mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: my_app
+      MYSQL_USER: aaron
+      MYSQL_PASSWORD: aaronsecret
+    volumes:
+      - db-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: my_phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql-db
+    depends_on:
+      - mysql-db
+
+volumes:
+  db-data:
