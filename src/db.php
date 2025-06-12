@@ -37,7 +37,6 @@ try {
     $pdo->exec($sql);
 
 } catch (\PDOException $e) {
-    // If table creation fails, display a specific error.
     die("DATABASE ERROR: Could not create the 'users' table. " . $e->getMessage());
 }
 ?>

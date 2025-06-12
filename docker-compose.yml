@@ -1,5 +1,4 @@
 services:
-  # Service 1: PHP with Apache Web Server
   php-apache:
     build: .
     container_name: my_php_apache_app
